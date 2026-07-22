@@ -1,0 +1,767 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Endowment &amp; Investment — Insight Foundation</title>
+  <meta name="description" content="The Insight Foundation Endowment and Waqf Fund — a Shariah-compliant, permanently invested financial backbone sustaining scholarships for future generations." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="icon" type="image/png" href="assets/insight-logo.png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+
+    /* ── ENDOWMENT PAGE STYLES ── */
+
+    /* SUSTAINING BANNER — light style */
+    .endow-banner {
+      background: var(--muted);
+      border-bottom: 1px solid var(--border);
+      padding: 3.5rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .endow-banner::before { display: none; }
+    .endow-banner-inner {
+      position: relative; z-index: 2;
+      display: flex; align-items: center;
+      justify-content: space-between;
+      gap: 3rem; flex-wrap: wrap;
+    }
+    .endow-banner-left .eyebrow-label { color: var(--secondary); margin-bottom: 0.5rem; }
+    .endow-banner-left h2 { color: var(--fg); font-size: 2.4rem; margin-bottom: 0.75rem; }
+    .endow-banner-left p  { color: var(--muted-fg); font-size: 1rem; line-height: 1.8; max-width: 54rem; }
+    .endow-banner-badges {
+      display: flex; flex-direction: column; gap: 0.75rem;
+      flex-shrink: 0;
+    }
+    .endow-badge {
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 0.65rem 1.25rem;
+      border-radius: 2rem;
+      font-size: 0.82rem; font-weight: 700;
+      white-space: nowrap;
+    }
+    .endow-badge.gold  { background: rgba(255,179,0,0.12);  color: #b45309; border: 1px solid rgba(255,179,0,0.35); }
+    .endow-badge.blue  { background: rgba(66,165,245,0.1);  color: #1565c0; border: 1px solid rgba(66,165,245,0.3); }
+    .endow-badge.green { background: rgba(102,187,106,0.1); color: #2e7d32; border: 1px solid rgba(102,187,106,0.3); }
+    @media (max-width:1024px) { .endow-banner-badges { flex-direction: row; flex-wrap: wrap; } }
+
+    /* WHY AN ENDOWMENT MATTERS — split */
+    .endow-why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    @media (max-width:1024px) { .endow-why-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+    .endow-why-visual {
+      position: relative;
+    }
+    /* Big donut-style ring graphic */
+    .endow-ring-wrap {
+      position: relative;
+      width: 22rem; height: 22rem;
+      margin: 0 auto;
+    }
+    @media (max-width:640px) { .endow-ring-wrap { width: 17rem; height: 17rem; } }
+    .endow-ring-svg { width: 100%; height: 100%; }
+    .endow-ring-center {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+    }
+    .endow-ring-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.75rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--muted-fg); margin-bottom: 0.25rem;
+    }
+    .endow-ring-value {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.4rem; font-weight: 800;
+      color: var(--fg); line-height: 1;
+    }
+    .endow-ring-sub {
+      font-size: 0.78rem; color: var(--muted-fg);
+      margin-top: 0.25rem; line-height: 1.4;
+    }
+
+    /* Floating stat pills around the ring */
+    .endow-float-pill {
+      position: absolute;
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.55rem 1rem;
+      border-radius: 2rem;
+      background: white;
+      border: 1px solid var(--border);
+      box-shadow: 0 6px 20px -6px rgba(30,41,59,0.14);
+      font-size: 0.78rem; font-weight: 700;
+      white-space: nowrap;
+    }
+    .endow-float-pill .pill-dot {
+      width: 0.6rem; height: 0.6rem; border-radius: 50%; flex-shrink: 0;
+    }
+    .pill-1 { top: 0.5rem; right: -1rem; }
+    .pill-2 { bottom: 2rem; right: -2rem; }
+    .pill-3 { bottom: 0.5rem; left: -1rem; }
+    @media (max-width:1024px) {
+      .pill-1 { right: 0; }
+      .pill-2 { right: 0; }
+      .pill-3 { left: 0; }
+    }
+
+    /* IOC MEMBERS GRID */
+    .ioc-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    @media (max-width:1024px) { .ioc-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width:640px)  { .ioc-grid { grid-template-columns: 1fr; } }
+
+    .ioc-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      box-shadow: 0 8px 28px -10px rgba(30,41,59,0.1);
+      display: flex; flex-direction: column;
+      gap: 0.85rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .ioc-card::after {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 4px; border-radius: var(--radius) var(--radius) 0 0;
+    }
+    .ioc-card:nth-child(1)::after { background: var(--primary); }
+    .ioc-card:nth-child(2)::after { background: var(--secondary); }
+    .ioc-card:nth-child(3)::after { background: var(--tertiary); }
+    .ioc-card:nth-child(4)::after { background: #FFB300; }
+    .ioc-card:nth-child(5)::after { background: #e040fb; }
+    .ioc-card:nth-child(6)::after { background: #26C6DA; }
+    .ioc-card:hover { transform: translateY(-5px); box-shadow: 0 12px 36px -10px rgba(30,41,59,0.16); }
+
+    .ioc-icon {
+      width: 3rem; height: 3rem; border-radius: 0.875rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; flex-shrink: 0;
+    }
+    .ioc-card:nth-child(1) .ioc-icon { background:rgba(233,30,99,0.1);  color:var(--primary); }
+    .ioc-card:nth-child(2) .ioc-icon { background:rgba(66,165,245,0.1); color:var(--secondary); }
+    .ioc-card:nth-child(3) .ioc-icon { background:rgba(102,187,106,0.1);color:var(--tertiary); }
+    .ioc-card:nth-child(4) .ioc-icon { background:rgba(255,179,0,0.12); color:#b45309; }
+    .ioc-card:nth-child(5) .ioc-icon { background:rgba(224,64,251,0.1); color:#9c27b0; }
+    .ioc-card:nth-child(6) .ioc-icon { background:rgba(38,198,218,0.12);color:#0e7490; }
+
+    .ioc-role { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted-fg); }
+    .ioc-card h3 { font-size: 1rem; margin: 0; color: var(--fg); }
+    .ioc-card p  { font-size: 0.85rem; color: var(--muted-fg); line-height: 1.7; margin: 0; }
+
+    /* GOVERNANCE FRAMEWORK — light section matching site theme */
+    .gov-framework-section {
+      background: rgba(156, 191, 212, 0.2);
+      padding: 5rem 0;
+      position: relative; overflow: hidden;
+    }
+    .gov-blob-1 {
+      position: absolute; top: -5rem; right: -5rem;
+      width: 26rem; height: 26rem;
+      border-radius: 60% 40% 55% 45%/50% 60% 40% 50%;
+      background: rgba(233,30,99,0.08);
+      animation: blob-morph 12s ease-in-out infinite;
+    }
+    .gov-blob-2 {
+      position: absolute; bottom: -5rem; left: -5rem;
+      width: 20rem; height: 20rem;
+      border-radius: 60% 40% 55% 45%/50% 60% 40% 50%;
+      background: rgba(66,165,245,0.08);
+      animation: blob-morph 15s ease-in-out infinite reverse;
+    }
+    @keyframes blob-morph {
+      0%,100% { border-radius: 60% 40% 55% 45%/50% 60% 40% 50%; }
+      50%      { border-radius: 40% 60% 45% 55%/60% 40% 50% 50%; }
+    }
+    .gov-framework-header { text-align: center; margin-bottom: 3.5rem; position: relative; z-index: 2; }
+    .gov-framework-header .eyebrow-label { color: var(--primary); }
+    .gov-framework-header h2 { color: var(--fg); font-size: 2.75rem; margin-top: 0.5rem; }
+
+    .gov-framework-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      position: relative; z-index: 2;
+      align-items: start;
+    }
+    @media (max-width:1024px) { .gov-framework-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+    .gov-checklist { display: flex; flex-direction: column; gap: 1rem; }
+    .gov-check-item {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 1.25rem 1.5rem;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      box-shadow: 0 4px 16px -8px rgba(30,41,59,0.08);
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .gov-check-item:hover { box-shadow: 0 8px 28px -8px rgba(30,41,59,0.14); transform: translateX(5px); }
+    .gov-check-icon {
+      width: 2.25rem; height: 2.25rem; flex-shrink: 0;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem;
+    }
+    .gci-pink  { background: rgba(233,30,99,0.1);  color: var(--primary); }
+    .gci-blue  { background: rgba(66,165,245,0.1); color: var(--secondary); }
+    .gci-green { background: rgba(102,187,106,0.1);color: var(--tertiary); }
+    .gci-amber { background: rgba(255,179,0,0.12); color: #b45309; }
+    .gci-purple{ background: rgba(102,187,106,0.1);color: var(--tertiary); }
+    .gov-check-item p { color: var(--muted-fg); font-size: 0.9rem; line-height: 1.7; margin: 0; }
+    .gov-check-item p strong { color: var(--fg); }
+
+    /* Compliance panel */
+    .compliance-panel {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 1.5rem;
+      padding: 2rem 2.25rem;
+      box-shadow: 0 10px 30px -12px rgba(30,41,59,0.1);
+    }
+    .compliance-panel h3 { color: var(--fg); font-size: 1.2rem; margin-bottom: 1.5rem; }
+    .compliance-list { display: flex; flex-direction: column; gap: 0.85rem; }
+    .compliance-row {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 0.85rem 1rem;
+      background: var(--muted);
+      border-radius: 0.75rem;
+      border: 1px solid var(--border);
+    }
+    .compliance-dot {
+      width: 0.55rem; height: 0.55rem; border-radius: 50%; flex-shrink: 0;
+    }
+    .compliance-row span { color: var(--muted-fg); font-size: 0.875rem; line-height: 1.6; }
+
+    .aaoifi-badge {
+      margin-top: 1.5rem;
+      display: inline-flex; align-items: center; gap: 0.65rem;
+      padding: 0.65rem 1.25rem;
+      background: rgba(255,179,0,0.1);
+      border: 1px solid rgba(255,179,0,0.35);
+      border-radius: 2rem;
+      color: #b45309; font-size: 0.82rem; font-weight: 700;
+    }
+
+    /* TRANSPARENCY TO DONORS */
+    .endow-transparency-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    @media (max-width:1024px) { .endow-transparency-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+    .endow-trans-feature {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 1.25rem;
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      background: white;
+      margin-bottom: 1rem;
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .endow-trans-feature:hover { box-shadow: 0 6px 24px -8px rgba(30,41,59,0.12); transform: translateX(4px); }
+    .etf-icon {
+      width: 2.75rem; height: 2.75rem; flex-shrink: 0;
+      border-radius: 0.75rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+    .etf-pink  { background:rgba(233,30,99,0.1);  color:var(--primary); }
+    .etf-blue  { background:rgba(66,165,245,0.1); color:var(--secondary); }
+    .etf-green { background:rgba(102,187,106,0.1);color:var(--tertiary); }
+    .etf-amber { background:rgba(255,179,0,0.12); color:#b45309; }
+    .endow-trans-feature h4 { font-size: 0.95rem; margin-bottom: 0.25rem; color: var(--fg); }
+    .endow-trans-feature p  { font-size: 0.84rem; color: var(--muted-fg); line-height: 1.65; margin: 0; }
+
+    /* Zakat cert card (right side) */
+    .endow-zakat-card {
+      background: linear-gradient(135deg, var(--primary), var(--secondary), var(--tertiary));
+      border-radius: 1.75rem;
+      padding: 2.5rem;
+      position: relative; overflow: hidden;
+    }
+    .endow-zakat-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .endow-zakat-wm {
+      position: absolute; right: -2rem; bottom: -2rem;
+      font-size: 10rem; color: rgba(255,255,255,0.05);
+    }
+    .endow-zakat-card h3 { color: white; font-size: 1.3rem; margin-bottom: 0.75rem; position: relative; z-index: 1; }
+    .endow-zakat-card p  { color: rgba(255,255,255,0.78); font-size: 0.9rem; line-height: 1.8; position: relative; z-index: 1; }
+    .endow-zakat-list {
+      list-style: none; padding: 0; margin: 1.25rem 0 0;
+      display: flex; flex-direction: column; gap: 0.6rem;
+      position: relative; z-index: 1;
+    }
+    .endow-zakat-list li {
+      display: flex; align-items: center; gap: 0.65rem;
+      font-size: 0.875rem; color: rgba(255,255,255,0.85);
+    }
+    .endow-zakat-list li i { color: #ffd54f; font-size: 0.85rem; }
+    .endow-zakat-card .miskath-note {
+      margin-top: 1.5rem;
+      padding: 0.85rem 1.1rem;
+      background: rgba(255,179,0,0.12);
+      border: 1px solid rgba(255,179,0,0.3);
+      border-radius: 0.75rem;
+      font-size: 0.8rem; color: #ffd54f;
+      position: relative; z-index: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a href="insight.html" class="logo-link">
+        <img src="assets/insight-logo.png" alt="Insight Foundation" class="logo-img" />
+        <div class="logo-text">
+          <span class="logo-name">Insight Foundation</span>
+          <span class="logo-tagline">Education • Equity • Empowerment</span>
+        </div>
+      </a>
+      <nav class="main-nav" id="main-nav">
+        <a href="insight.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About Us</a>
+        <a href="our-partners.html" class="nav-link">Our Partners</a>
+        <a href="endowment.html" class="nav-link active">Endowment</a>
+        <a href="donation.html" class="nav-link">Donation</a>
+        <a href="training&programs.html" class="nav-link">Programs</a>
+        <a href="news.html" class="nav-link">News</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <a href="donation.html" class="btn btn-brand nav-cta">Support a Student</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero page-hero" id="hero">
+    <img src="assets/endowment.jpeg" alt="" class="hero-bg-img" aria-hidden="true" />
+    <div class="hero-overlay"></div>
+    <div class="container hero-inner" style="padding-top:2rem;">
+      <div class="hero-text">
+        <h1>Endowment &amp; <span class="gradient-text">Investment Fund</span></h1>
+        <p>The Insight Foundation Endowment and Waqf Fund — a Shariah-compliant, permanently invested financial backbone that grows over time to permanently underwrite scholarships for future generations.</p>
+        <div class="hero-btns">
+          <a href="#contribute" class="btn btn-brand">Contribute to the Fund →</a>
+          <a href="#governance" class="btn btn-outline-white">IOC Governance</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BREADCRUMB -->
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="container breadcrumb-inner">
+      <a href="insight.html">Home</a>
+      <i class="fas fa-arrow-right"></i>
+      <span>Endowment &amp; Investment</span>
+    </div>
+  </nav>
+
+  <!-- SUSTAINING BANNER -->
+  <div class="endow-banner">
+    <div class="container endow-banner-inner">
+      <div class="endow-banner-left reveal">
+        <div class="eyebrow-label">Building for the Long Term</div>
+        <h2>The Financial Backbone of a <span class="gradient-text">Permanent Mission</span></h2>
+        <p>Rather than relying solely on annual fundraising cycles, the Endowment and Waqf Fund is structured to grow over time and generate a sustainable income stream — permanently underwriting scholarships for Zakat‑eligible students in alignment with the Foundation's equity‑driven mission. This enduring financial model ensures that future generations of learners, regardless of circumstance, will continue to access education, skills, and opportunity through the Insight Foundation.</p>
+      </div>
+      <div class="endow-banner-badges reveal">
+        <div class="endow-badge gold"><i class="fas fa-star"></i> Shariah-Compliant</div>
+        <div class="endow-badge blue"><i class="fas fa-shield-alt"></i> AAOIFI Standards</div>
+        <div class="endow-badge green"><i class="fas fa-infinity"></i> Perpetual Impact</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHY AN ENDOWMENT MATTERS -->
+  <section class="section bg-muted" id="why">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="eyebrow-label">Why an Endowment Matters</div>
+        <h2>A Gift That Works <span class="gradient-text">Indefinitely</span></h2>
+      </div>
+
+      <div class="endow-why-grid reveal">
+
+        <!-- Left: ring graphic -->
+        <div class="endow-why-visual">
+          <div class="endow-ring-wrap">
+            <svg class="endow-ring-svg" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Background track -->
+              <circle cx="110" cy="110" r="90" stroke="#E2E8F0" stroke-width="18" fill="none"/>
+              <!-- Principal segment (never touched) — ~65% -->
+              <circle cx="110" cy="110" r="90"
+                stroke="#E91E63" stroke-width="18" fill="none"
+                stroke-dasharray="366 199"
+                stroke-dashoffset="70"
+                stroke-linecap="round"/>
+              <!-- Income segment — ~25% -->
+              <circle cx="110" cy="110" r="90"
+                stroke="#42A5F5" stroke-width="18" fill="none"
+                stroke-dasharray="141 424"
+                stroke-dashoffset="-296"
+                stroke-linecap="round"/>
+              <!-- Growth segment — ~10% -->
+              <circle cx="110" cy="110" r="90"
+                stroke="#66BB6A" stroke-width="18" fill="none"
+                stroke-dasharray="57 508"
+                stroke-dashoffset="-437"
+                stroke-linecap="round"/>
+              <!-- Inner shadow ring -->
+              <circle cx="110" cy="110" r="72" stroke="#F8FAFC" stroke-width="1" fill="white"/>
+            </svg>
+            <div class="endow-ring-center">
+              <div class="endow-ring-label">Permanent Capital</div>
+              <div class="endow-ring-value">∞</div>
+              <div class="endow-ring-sub">Principal never<br>eroded</div>
+            </div>
+            <!-- Floating pills -->
+            <div class="endow-float-pill pill-1">
+              <span class="pill-dot" style="background:var(--primary);"></span>
+              Principal — Protected
+            </div>
+            <div class="endow-float-pill pill-2">
+              <span class="pill-dot" style="background:var(--secondary);"></span>
+              Income → Scholarships
+            </div>
+            <div class="endow-float-pill pill-3">
+              <span class="pill-dot" style="background:var(--tertiary);"></span>
+              Growth — Reinvested
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: text -->
+        <div>
+          <p style="color:var(--muted-fg);line-height:1.9;font-size:1.05rem;margin-bottom:1.5rem;">A scholarship funded from an endowment is a scholarship that does not rise and fall with the uncertainties of annual fundraising. Every contribution to the Insight Foundation Endowment and Waqf Fund is invested prudently and permanently.</p>
+          <p style="color:var(--muted-fg);line-height:1.9;font-size:1.05rem;margin-bottom:2rem;">Only the income generated — <strong>never the principal</strong> — is used to sustain scholarships year after year. This model provides a clear answer to the question every donor eventually asks:</p>
+
+          <div class="about-quote reveal">
+            <em>"What happens to my gift after this year?"</em><br><br>
+            Through the Endowment and Waqf Fund, your contribution continues working indefinitely, supporting future generations of learners long after the initial donation is made.
+          </div>
+
+          <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem;">
+            <div class="kn-card" style="flex:1;min-width:10rem;padding:1.25rem;">
+              <div class="kn-icon" style="color:var(--primary);"><i class="fas fa-lock"></i></div>
+              <div class="kn-badge-text" style="color:var(--primary);font-size:1.1rem;">Principal</div>
+              <div class="kn-label">Permanently protected — never disbursed</div>
+            </div>
+            <div class="kn-card" style="flex:1;min-width:10rem;padding:1.25rem;">
+              <div class="kn-icon" style="color:var(--secondary);"><i class="fas fa-graduation-cap"></i></div>
+              <div class="kn-badge-text" style="color:var(--secondary);font-size:1.1rem;">Income</div>
+              <div class="kn-label">Used exclusively for scholarships</div>
+            </div>
+            <div class="kn-card" style="flex:1;min-width:10rem;padding:1.25rem;">
+              <div class="kn-icon" style="color:var(--tertiary);"><i class="fas fa-chart-line"></i></div>
+              <div class="kn-badge-text" style="color:var(--tertiary);font-size:1.1rem;">Growth</div>
+              <div class="kn-label">Reinvested to expand future capacity</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- IOC GOVERNANCE -->
+  <section class="section" id="governance">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="eyebrow-label">Governed by the Investment Oversight Committee</div>
+        <h2>Expert Oversight at <span class="gradient-text">Every Level</span></h2>
+        <p>The Fund is supervised by the Investment Oversight Committee (IOC) — a multi-disciplinary body maintaining formal compliance with Shariah principles and Sri Lankan financial regulations.</p>
+      </div>
+
+      <div class="ioc-grid">
+
+        <div class="ioc-card reveal reveal-delay-1">
+          <div class="ioc-icon"><i class="fas fa-user-tie"></i></div>
+          <div class="ioc-role">Chair</div>
+          <h3>Board Representative</h3>
+          <p>Provides governance continuity and ensures the IOC's decisions remain aligned with the Foundation's constitutional mandate and long-term mission.</p>
+        </div>
+
+        <div class="ioc-card reveal reveal-delay-2">
+          <div class="ioc-icon"><i class="fas fa-coins"></i></div>
+          <div class="ioc-role">Committee Member</div>
+          <h3>Islamic Finance Professional</h3>
+          <p>Oversees the Shariah-Compliant Investment Policy Statement (IPS) and ensures all investment vehicles conform to AAOIFI standards and halal finance principles.</p>
+        </div>
+
+        <div class="ioc-card reveal reveal-delay-3">
+          <div class="ioc-icon"><i class="fas fa-gavel"></i></div>
+          <div class="ioc-role">Committee Member</div>
+          <h3>Legal &amp; Regulatory Advisor</h3>
+          <p>Ensures full compliance with Sri Lanka's Companies Act, Inland Revenue regulations, and Central Bank investment guidelines at all times.</p>
+        </div>
+
+        <div class="ioc-card reveal reveal-delay-1">
+          <div class="ioc-icon"><i class="fas fa-shield-alt"></i></div>
+          <div class="ioc-role">Committee Member</div>
+          <h3>Risk Management Specialist</h3>
+          <p>Maintains liquidity reserves to meet annual scholarship obligations and monitors portfolio risk to ensure the principal is never eroded.</p>
+        </div>
+
+        <div class="ioc-card reveal reveal-delay-2">
+          <div class="ioc-icon"><i class="fas fa-mosque"></i></div>
+          <div class="ioc-role">Committee Member</div>
+          <h3>Qualified Shariah Advisor</h3>
+          <p>Commissions and reviews the independent annual Shariah audit, certifying continued adherence to recognised Islamic jurisprudence in all Fund activities.</p>
+        </div>
+
+        <div class="ioc-card reveal reveal-delay-3">
+          <div class="ioc-icon"><i class="fas fa-users"></i></div>
+          <div class="ioc-role">Non-Voting Representative</div>
+          <h3>Scholarship Committee</h3>
+          <p>Provides the IOC with visibility into scholarship demand, disbursement schedules, and student outcomes — linking investment performance to real-world impact.</p>
+        </div>
+
+      </div>
+
+      <!-- IOC mandate note -->
+      <div class="about-quote reveal" style="max-width:860px;margin:2.5rem auto 0;">
+        The IOC maintains a formal <strong>Shariah-Compliant Investment Policy Statement (IPS)</strong>, conducts <strong>quarterly reviews</strong> of investment performance and compliance, and commissions an <strong>independent annual Shariah audit</strong> to ensure continued adherence to AAOIFI standards.
+      </div>
+    </div>
+  </section>
+
+  <!-- GOVERNANCE & COMPLIANCE FRAMEWORK -->
+  <section class="gov-framework-section" id="compliance">
+    <div class="gov-blob-1"></div>
+    <div class="gov-blob-2"></div>
+    <div class="container">
+
+      <div class="gov-framework-header reveal">
+        <div class="eyebrow-label">Governance &amp; Compliance Framework</div>
+        <h2>Accountability You Can <span class="gradient-text">Rely On</span></h2>
+      </div>
+
+      <div class="gov-framework-grid">
+
+        <!-- Left: checklist -->
+        <div class="gov-checklist reveal">
+          <div class="gov-check-item">
+            <div class="gov-check-icon gci-blue"><i class="fas fa-calendar-check"></i></div>
+            <p><strong style="color:var(--fg);">Quarterly</strong> investment performance and Shariah compliance review by the full IOC</p>
+          </div>
+          <div class="gov-check-item">
+            <div class="gov-check-icon gci-pink"><i class="fas fa-search"></i></div>
+            <p><strong style="color:var(--fg);">Annual independent Shariah audit</strong> commissioned and reviewed against AAOIFI standards</p>
+          </div>
+          <div class="gov-check-item">
+            <div class="gov-check-icon gci-amber"><i class="fas fa-lock"></i></div>
+            <p><strong style="color:var(--fg);">Strict segregation</strong> of Zakat-designated funds from general Waqf capital at all times</p>
+          </div>
+          <div class="gov-check-item">
+            <div class="gov-check-icon gci-green"><i class="fas fa-water"></i></div>
+            <p><strong style="color:var(--fg);">Liquidity reserves</strong> maintained to meet annual scholarship obligations without eroding long-term capital</p>
+          </div>
+          <div class="gov-check-item">
+            <div class="gov-check-icon gci-purple"><i class="fas fa-balance-scale"></i></div>
+            <p><strong style="color:var(--fg);">Full compliance</strong> with Sri Lanka's Companies Act, Inland Revenue regulations, Central Bank investment guidelines, and TVEC financial governance expectations</p>
+          </div>
+        </div>
+
+        <!-- Right: compliance panel -->
+        <div class="compliance-panel reveal" style="transition-delay:120ms;">
+          <h3><i class="fas fa-certificate" style="color:#ffd54f;margin-right:0.5rem;"></i>Regulatory Compliance Stack</h3>
+          <div class="compliance-list">
+            <div class="compliance-row">
+              <span class="compliance-dot" style="background:var(--primary);"></span>
+              <span>Sri Lanka Companies Act (No. 7 of 2007) — Guarantee company governance obligations</span>
+            </div>
+            <div class="compliance-row">
+              <span class="compliance-dot" style="background:var(--secondary);"></span>
+              <span>Inland Revenue Act — Tax reporting and exempt status maintenance</span>
+            </div>
+            <div class="compliance-row">
+              <span class="compliance-dot" style="background:var(--tertiary);"></span>
+              <span>Central Bank of Sri Lanka — Investment portfolio and liquidity guidelines</span>
+            </div>
+            <div class="compliance-row">
+              <span class="compliance-dot" style="background:#FFB300;"></span>
+              <span>TVEC Financial Governance Expectations — Vocational institution financial standards</span>
+            </div>
+            <div class="compliance-row">
+              <span class="compliance-dot" style="background:#e040fb;"></span>
+              <span>AAOIFI Shariah Standards — Islamic Finance investment and Waqf management</span>
+            </div>
+            <div class="compliance-row">
+              <span class="compliance-dot" style="background:#26C6DA;"></span>
+              <span>Miskath Research Institute Guidelines — Zakat stewardship and disbursement</span>
+            </div>
+          </div>
+          <div class="aaoifi-badge">
+            <i class="fas fa-star"></i> AAOIFI-Aligned Shariah-Compliant Investment Policy
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TRANSPARENCY TO DONORS -->
+  <section class="section bg-muted" id="transparency">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="eyebrow-label">Transparency to Donors</div>
+        <h2>See Exactly How Your <span class="gradient-text">Contribution Works</span></h2>
+        <p>The IOC provides a comprehensive transparency framework ensuring every donor has full visibility into how contributions are managed and the impact they create — year after year.</p>
+      </div>
+
+      <div class="endow-transparency-grid reveal">
+
+        <!-- Left: feature list -->
+        <div>
+          <div class="endow-trans-feature">
+            <div class="etf-icon etf-pink"><i class="fas fa-chart-bar"></i></div>
+            <div>
+              <h4>Annual Donor Impact Reports</h4>
+              <p>Comprehensive yearly reports covering investment performance, scholarship disbursements, and measurable outcomes — delivered directly to every Fund contributor.</p>
+            </div>
+          </div>
+          <div class="endow-trans-feature">
+            <div class="etf-icon etf-blue"><i class="fas fa-file-alt"></i></div>
+            <div>
+              <h4>Zakat-Specific Reporting</h4>
+              <p>Donors who designate contributions as Zakat receive dedicated reporting confirming exclusive allocation to verified Zakat-eligible recipients, fully separated from general Waqf capital.</p>
+            </div>
+          </div>
+          <div class="endow-trans-feature">
+            <div class="etf-icon etf-green"><i class="fas fa-graduation-cap"></i></div>
+            <div>
+              <h4>Public Scholarship Outcome Disclosure</h4>
+              <p>Enrolment, graduation, and employment indicators are publicly disclosed, ensuring donors can track the real-world impact of the Fund on learner outcomes.</p>
+            </div>
+          </div>
+          <div class="endow-trans-feature">
+            <div class="etf-icon etf-amber"><i class="fas fa-certificate"></i></div>
+            <div>
+              <h4>Zakat Compliance Certificates</h4>
+              <p>Available on request, confirming that your contribution has been deployed strictly in accordance with Shariah principles and Miskath Research Institute's guidance.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Zakat cert card -->
+        <div class="endow-zakat-card reveal" style="transition-delay:120ms;">
+          <div class="endow-zakat-wm"><i class="fas fa-certificate"></i></div>
+          <h3><i class="fas fa-award" style="color:#ffd54f;margin-right:0.5rem;"></i>Zakat Compliance Certificate</h3>
+          <p>Available to all Endowment &amp; Waqf Fund donors who designate their contribution as Zakat. Confirms your gift was:</p>
+          <ul class="endow-zakat-list">
+            <li><i class="fas fa-check-circle"></i> Allocated exclusively to a verified Zakat-eligible student</li>
+            <li><i class="fas fa-check-circle"></i> Held in a fully segregated Zakat account</li>
+            <li><i class="fas fa-check-circle"></i> Deployed in accordance with Shariah-compliant guidelines</li>
+            <li><i class="fas fa-check-circle"></i> Reviewed under the annual independent Shariah audit</li>
+            <li><i class="fas fa-check-circle"></i> Endorsed by the Miskath Research Institute, Sri Lanka</li>
+          </ul>
+          <div class="miskath-note">
+            <i class="fas fa-star" style="margin-right:0.4rem;"></i>
+            <strong>Miskath Research Institute endorsed</strong> — Sri Lanka's leading Shariah research body formally endorses the Foundation's Zakat stewardship processes.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="section" id="contribute">
+    <div class="container">
+      <div class="cta-banner reveal">
+        <div class="cta-blob cta-blob-1"></div>
+        <div class="cta-blob cta-blob-2"></div>
+        <div class="cta-content">
+          <h2>Invest in Generations to Come</h2>
+          <p>Contribute to the Endowment &amp; Waqf Fund or read the full IOC Governance Guidelines to understand exactly how your gift is protected, invested, and put to work.</p>
+          <div class="cta-btns">
+            <a href="donation.html" class="btn btn-white">Contribute to the Endowment &amp; Waqf Fund <span class="arrow">→</span></a>
+            <a href="about.html#governance" class="btn btn-outline-white">Read the Full IOC Governance Guidelines</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="assets/insight-logo.png" alt="Insight Foundation" />
+          <div>
+            <strong>Insight Foundation</strong>
+            <span>Reg. No: GA00307148</span>
+          </div>
+        </div>
+        <p>A not-for-profit guarantee company committed to educational empowerment, social inclusion and sustainable development across Sri Lanka.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="insight.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="our-partners.html">Our Partners</a></li>
+          <li><a href="endowment.html">Endowment</a></li>
+          <li><a href="donation.html">Donation</a></li>
+          <li><a href="training&programs.html">Programs</a></li>
+          <li><a href="news.html">News &amp; Events</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Programs</h4>
+        <ul>
+          <li><a href="training&programs.html">IIMT Campus</a></li>
+          <li><a href="training&programs.html">Insight College of Technology</a></li>
+          <li><a href="training&programs.html">ICED</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul class="contact-list">
+          <li><i class="fas fa-map-marker-alt"></i> 78, S. De S. Jayasinghe Road, Dehiwela, 10350, Sri Lanka</li>
+          <li><i class="fas fa-phone"></i> <a href="tel:+94773832373">+94 77 383 2373</a></li>
+          <li><i class="fas fa-envelope"></i> <a href="mailto:foundation@insight.edu.lk">foundation@insight.edu.lk</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>© <span id="year"></span> The Insight Foundation. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- STICKY CTA -->
+  <a href="contact.html" class="sticky-cta" id="sticky-cta">Get Involved <span class="arrow">→</span></a>
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top"><i class="fas fa-chevron-up"></i></button>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
